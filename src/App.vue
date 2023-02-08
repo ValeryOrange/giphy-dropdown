@@ -3,5 +3,7 @@
 </script>
 
 <template>
-    <GiphyDropdown/>
+    <main>
+      <GiphyDropdown/>
+    </main>
 </template>
