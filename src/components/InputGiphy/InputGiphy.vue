@@ -8,7 +8,11 @@
             clearTimeout(timeoutId);
         }
         timeoutId = setTimeout(() => {
-            emit('userInputSet', e?.target?.value);
+            const el = e?.target;
+            if (el) {
+                console.log(el.checkValidity());
+                emit('userInputSet', el.value);
+            }
         }, EMIT_DELAY);
     }
 </script>
@@ -17,6 +21,7 @@
     <input
         @input="emitInputValue"
         :placeholder="PLACEHOLDER"
+        pattern="^[a-zA-Z0-9_]+$"
         class="giphySearch"
     />
 </template>
