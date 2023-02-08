@@ -1,12 +1,10 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0);
-  const doubleCount = computed(() => count.value * 2);
-  function increment() {
-    count.value++;
-  }
+export const useMainStore = defineStore('main', () => {
+  const searchStr = ref('');
+  const picList = ref([]);
+  const isLoading = ref(false);
 
-  return { count, doubleCount, increment };
+  return { searchStr, picList, isLoading };
 });

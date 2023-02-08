@@ -2,11 +2,11 @@
 </script>
 
 <template>
-    <input placeholder="Search animated pics from Giphy" class="main-input"/>
+    <input placeholder="Search animated pics from Giphy" class="giphySearch"/>
 </template>
 
 <style scoped>
-    .main-input {
+    .giphySearch {
         width: 100%;
         height: 40px;
         border: solid 1px var(--color-border);
