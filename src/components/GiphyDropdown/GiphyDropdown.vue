@@ -13,8 +13,8 @@
 
 <template>
     <InputGiphy @userInputSet="setUserInput"/>
-    <AnimatedLoader v-if="isLoading"/>
-    <DropdownList v-else-if="picList.length"/>
+    <AnimatedLoader v-show="isLoading"/>
+    <DropdownList v-if="picList.length && !isLoading"/>
 </template>
 
 <style scoped>

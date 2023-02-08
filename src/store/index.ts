@@ -1,13 +1,39 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
+const PATH = 'https://api.giphy.com/v1/gifs/search';
+const API_KEY = 'WxdyYLhMuub9clDtbglE0bJkSBExzePj';
+const DEFAULT_ERROR_MESSAGE = 'Oops! Something went wrong. Please, try again later.';
 
 export const useMainStore = defineStore('main', () => {
-  const searchStr = ref('');
   const picList = ref([]);
   const isLoading = ref(false);
-  function setSearchStr(text: string) {
-    searchStr.value = text;
+  const errorMessage = ref('');
+
+  function setErrorMessage(msg: string) {
+    errorMessage.value = msg;
   }
 
-  return { searchStr, picList, isLoading, setSearchStr };
+  function setSearchStr(text: string) {
+    console.log(text);
+    getGiphys(text);
+  }
+
+  function setIsLoading(isWaiting: boolean) {
+    isLoading.value = isWaiting;
+  }
+
+  function getGiphys(str: string) {
+    const url = `${PATH}?q=${str}&api_key=${API_KEY}`;
+    setIsLoading(true);
+    fetch(url)
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch((err) => {
+      console.warn(err);
+      setErrorMessage(DEFAULT_ERROR_MESSAGE);
+    })
+    .finally(() => setIsLoading(false));
+  }
+
+  return { picList, isLoading, setSearchStr };
 });
