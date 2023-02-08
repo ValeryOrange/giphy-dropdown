@@ -1,8 +1,23 @@
 <script setup lang="ts">
+    const PLACEHOLDER = "Search animated pics from Giphy";
+    const emit = defineEmits(['userInputSet']);
+    let timeoutId = 0;
+    function emitInputValue(e: Event) {
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(() => {
+            emit('userInputSet', e?.target?.value);
+        }, 500);
+    }
 </script>
 
 <template>
-    <input placeholder="Search animated pics from Giphy" class="giphySearch"/>
+    <input
+        @input="emitInputValue"
+        :placeholder="PLACEHOLDER"
+        class="giphySearch"
+    />
 </template>
 
 <style scoped>

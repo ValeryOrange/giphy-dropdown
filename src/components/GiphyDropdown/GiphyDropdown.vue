@@ -5,11 +5,14 @@
     import { useMainStore } from '@/store';
 
     const store = useMainStore();
-    const { isLoading, picList } = store;
+    const { isLoading, picList, setSearchStr } = store;
+    function setUserInput(text: string) {
+        setSearchStr(text);
+  }
 </script>
 
 <template>
-    <InputGiphy />
+    <InputGiphy @userInputSet="setUserInput"/>
     <AnimatedLoader v-if="isLoading"/>
     <DropdownList v-else-if="picList.length"/>
 </template>
