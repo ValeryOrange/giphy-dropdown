@@ -1,4 +1,7 @@
 <script setup lang="ts">
+    const props = defineProps({
+        text: String,
+    });
     const PLACEHOLDER = "Search animated pics from Giphy";
     const EMIT_DELAY = 500;
     const emit = defineEmits([
@@ -30,6 +33,7 @@
 <template>
     <input
         :placeholder="PLACEHOLDER"
+        :value="text"
         pattern="^[a-zA-Z0-9\s]+$"
         class="giphySearch"
         @input="emitInputValue"

@@ -12,12 +12,14 @@ export const useMainStore = defineStore('main', () => {
   const isLoading = ref(false);
   const errorMessage = ref('');
   const errorMessageType = ref('');
+  const searchStr = ref('');
 
   function setErrorMessage(msg: string) {
     errorMessage.value = msg;
   }
 
   function setSearchStr(text: string) {
+    searchStr.value = text;
     if (text.length) {
       getGiphys(text);
     }
@@ -81,5 +83,6 @@ export const useMainStore = defineStore('main', () => {
     setErrorMessageType,
     errorMessageType,
     setPicList,
+    searchStr,
   };
 });

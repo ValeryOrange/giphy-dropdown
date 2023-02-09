@@ -43,6 +43,7 @@
 
 <template>
     <InputGiphy
+        :text="store.searchStr"
         @userInputSet="setUserInput"
         @invalidInput="setInvalidMessage(INVALID_INPUT_MESSAGE)"
         @clearNotification="clearErrorMessage"
