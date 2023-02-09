@@ -1,7 +1,7 @@
 <script setup lang="ts">
     const PLACEHOLDER = "Search animated pics from Giphy";
     const EMIT_DELAY = 500;
-    const emit = defineEmits(['userInputSet']);
+    const emit = defineEmits(['userInputSet', 'invalidInput']);
     let timeoutId = 0;
     function emitInputValue(e: Event) {
         if (timeoutId) {
@@ -10,8 +10,11 @@
         timeoutId = setTimeout(() => {
             const el = e?.target;
             if (el) {
-                console.log(el.checkValidity());
-                emit('userInputSet', el.value);
+                if (el.checkValidity()) {
+                    emit('userInputSet', el.value);
+                } else {
+                    emit('invalidInput');
+                }
             }
         }, EMIT_DELAY);
     }
@@ -21,7 +24,7 @@
     <input
         @input="emitInputValue"
         :placeholder="PLACEHOLDER"
-        pattern="^[a-zA-Z0-9_]+$"
+        pattern="^[a-zA-Z0-9\s]+$"
         class="giphySearch"
     />
 </template>

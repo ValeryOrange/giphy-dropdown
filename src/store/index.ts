@@ -14,7 +14,6 @@ export const useMainStore = defineStore('main', () => {
   }
 
   function setSearchStr(text: string) {
-    console.log(text);
     getGiphys(text);
   }
 
@@ -35,5 +34,5 @@ export const useMainStore = defineStore('main', () => {
     .finally(() => setIsLoading(false));
   }
 
-  return { picList, isLoading, setSearchStr };
+  return { picList, isLoading, setSearchStr, setErrorMessage, errorMessage };
 });

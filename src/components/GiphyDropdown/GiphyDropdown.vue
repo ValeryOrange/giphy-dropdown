@@ -5,16 +5,23 @@
     import { useMainStore } from '@/store';
 
     const store = useMainStore();
-    const { isLoading, picList, setSearchStr } = store;
+    const { setSearchStr, setErrorMessage } = store;
     function setUserInput(text: string) {
         setSearchStr(text);
-  }
+    }
+    function setInvalidMessage() {
+        setErrorMessage('Your input is invalid.');
+    }
 </script>
 
 <template>
-    <InputGiphy @userInputSet="setUserInput"/>
-    <AnimatedLoader v-show="isLoading"/>
-    <DropdownList v-if="picList.length && !isLoading"/>
+    <InputGiphy
+        @userInputSet="setUserInput"
+        @invalidInput="setInvalidMessage"
+    />
+    <AnimatedLoader v-show="store.isLoading"/>
+    <DropdownList v-if="store.picList.length && !store.isLoading"/>
+    <p v-if="store.errorMessage">{{ store.errorMessage }}</p>
 </template>
 
 <style scoped>
