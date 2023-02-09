@@ -40,7 +40,10 @@
         @clearPicList="resetPicList"
     />
     <AnimatedLoader v-show="store.isLoading"/>
-    <DropdownList v-show="store.picList.length && !store.isLoading"/>
+    <DropdownList
+        v-show="store.picList.length && !store.isLoading"
+        :images="store.picList"
+    />
     <UserNotification
         v-show="store.errorMessage"
         :text="store.errorMessage"

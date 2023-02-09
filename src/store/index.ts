@@ -49,8 +49,9 @@ export const useMainStore = defineStore('main', () => {
         setErrorMessageType('default');
         return;
       }
-      const pics = data.map(({ images }: {images: IImages}) => {
+      const pics = data.map(({ id, images }: {id: string, images: IImages}) => {
         return {
+          id,
           mobile: {
             gif: images.fixed_width.url,
             static: images.fixed_width_still.url,

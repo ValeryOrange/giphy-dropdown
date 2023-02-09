@@ -1,36 +1,37 @@
 export interface IImages {
     fixed_width: {
-        url: String
+        url: string
     },
     fixed_width_still: {
-        url: String,
+        url: string,
     },
     original: {
-        url: String,
+        url: string,
     },
     original_still: {
-        url: String,
+        url: string,
     },
 }
 
 export interface IGif {
-    type: String,
-    id: String,
-    url: String,
-    title: String,
+    type: string,
+    id: string,
+    url: string,
+    title: string,
     images: IImages,
 }
 
 export type GifType = IGif[];
 
 export interface IPic {
+    id: string,
     mobile: {
-        gif: String,
-        static: String,
+        gif: string,
+        static: string,
     },
     desktop: {
-        gif: String,
-        static: String,
+        gif: string,
+        static: string,
     }
 }
 
