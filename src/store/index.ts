@@ -8,6 +8,7 @@ export const useMainStore = defineStore('main', () => {
   const picList = ref([]);
   const isLoading = ref(false);
   const errorMessage = ref('');
+  const errorMessageType = ref('');
 
   function setErrorMessage(msg: string) {
     errorMessage.value = msg;
@@ -21,6 +22,10 @@ export const useMainStore = defineStore('main', () => {
     isLoading.value = isWaiting;
   }
 
+  function setErrorMessageType(type: string) {
+    errorMessageType.value = type;
+  }
+
   function getGiphys(str: string) {
     const url = `${PATH}?q=${str}&api_key=${API_KEY}`;
     setIsLoading(true);
@@ -30,9 +35,18 @@ export const useMainStore = defineStore('main', () => {
     .catch((err) => {
       console.warn(err);
       setErrorMessage(DEFAULT_ERROR_MESSAGE);
+      setErrorMessageType('error');
     })
     .finally(() => setIsLoading(false));
   }
 
-  return { picList, isLoading, setSearchStr, setErrorMessage, errorMessage };
+  return {
+    picList,
+    isLoading,
+    setSearchStr,
+    setErrorMessage,
+    errorMessage,
+    setErrorMessageType,
+    errorMessageType,
+  };
 });

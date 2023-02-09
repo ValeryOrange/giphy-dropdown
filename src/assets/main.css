@@ -9,6 +9,7 @@ main {
 
 @media (min-width: 400px) {
     main {
+        position: relative;
         padding: 40px 40px 0 40px;
     }
 }
