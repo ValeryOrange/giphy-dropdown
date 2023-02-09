@@ -33,11 +33,14 @@
     }
 
     function copyImageUrl(url: string) {
-        setPicList([]);
-        setSearchStr('');
-        setErrorMessage(COPPIED_URL_MESSAGE);
-        setErrorMessageType('success');
-        console.log(url);
+        navigator.clipboard.writeText(url)
+        .then(() => {
+            setPicList([]);
+            setSearchStr('');
+            setErrorMessage(COPPIED_URL_MESSAGE);
+            setErrorMessageType('success');
+            console.log(url);
+        });
     }
 </script>
 
