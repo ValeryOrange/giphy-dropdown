@@ -6,6 +6,7 @@
     import { useMainStore } from '@/store';
 
     const INVALID_INPUT_MESSAGE = 'Your input is invalid';
+    const COPPIED_URL_MESSAGE = 'The image url is coppied to your clipboard';
 
     const store = useMainStore();
     const {
@@ -30,6 +31,14 @@
     function resetPicList() {
         setPicList([]);
     }
+
+    function copyImageUrl(url: string) {
+        setPicList([]);
+        setSearchStr('');
+        setErrorMessage(COPPIED_URL_MESSAGE);
+        setErrorMessageType('success');
+        console.log(url);
+    }
 </script>
 
 <template>
@@ -43,6 +52,7 @@
     <DropdownList
         v-show="store.picList.length && !store.isLoading"
         :images="store.picList"
+        @sendOriginal="copyImageUrl"
     />
     <UserNotification
         v-show="store.errorMessage"

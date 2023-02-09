@@ -6,6 +6,10 @@
     const props = defineProps({
         images: Object as PropType<PicListType>,
     });
+    const emit = defineEmits(['sendOriginal']);
+    function sendOriginal(url: string) {
+        emit('sendOriginal', url);
+    }
 </script>
 
 <template>
@@ -16,6 +20,7 @@
                 :key="image.id"
                 :src="image.desktop.gif"
                 :original="image.desktop.gif"
+                @sendOriginal="sendOriginal"
             />
         </ul>
     </div>
