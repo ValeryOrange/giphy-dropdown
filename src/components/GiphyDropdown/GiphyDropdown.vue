@@ -8,7 +8,12 @@
     const INVALID_INPUT_MESSAGE = 'Your input is invalid';
 
     const store = useMainStore();
-    const { setSearchStr, setErrorMessage, setErrorMessageType } = store;
+    const {
+        setSearchStr,
+        setErrorMessage,
+        setErrorMessageType,
+        setPicList,
+    } = store;
     function setUserInput(text: string) {
         setSearchStr(text);
     }
@@ -16,18 +21,28 @@
         setErrorMessage(msg);
         setErrorMessageType('error');
     }
+
+    function clearErrorMessage() {
+        setErrorMessage('');
+        setErrorMessageType('');
+    }
+
+    function resetPicList() {
+        setPicList([]);
+    }
 </script>
 
 <template>
     <InputGiphy
         @userInputSet="setUserInput"
         @invalidInput="setInvalidMessage(INVALID_INPUT_MESSAGE)"
-        @clearNotification="setInvalidMessage('')"
+        @clearNotification="clearErrorMessage"
+        @clearPicList="resetPicList"
     />
     <AnimatedLoader v-show="store.isLoading"/>
-    <DropdownList v-if="store.picList.length && !store.isLoading"/>
+    <DropdownList v-show="store.picList.length && !store.isLoading"/>
     <UserNotification
-        v-if="store.errorMessage"
+        v-show="store.errorMessage"
         :text="store.errorMessage"
         :type="store.errorMessageType"
     />

@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
-// TODO: fix all warnings and error from ts and Vetur
 
+// TODO: fix all warnings and error from ts and Vetur
 import './assets/main.css';
 
 const app = createApp(App);

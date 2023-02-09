@@ -1,11 +1,7 @@
 <script setup lang="ts">
-    export interface Props {
-        text: string
-        type?: string
-    }
-
-    const props = withDefaults(defineProps<Props>(), {
-        type: 'default',
+    const props = defineProps({
+        text: String,
+        type: String
     });
 </script>
 
@@ -20,6 +16,7 @@
         border-radius: 6px;
         position: absolute;
         left: 15px;
+        right: 15px;
         top: 65px;
         padding: 5px;
     }
@@ -43,6 +40,7 @@
     @media (min-width: 400px) {
         .userNotification {
             left: 40px;
+            right: 40px;
             top: 85px;
         }
     }

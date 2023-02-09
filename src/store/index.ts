@@ -1,11 +1,14 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
+import type { GifType, IImages, PicListType } from '@/types';
+
 const PATH = 'https://api.giphy.com/v1/gifs/search';
 const API_KEY = 'WxdyYLhMuub9clDtbglE0bJkSBExzePj';
 const DEFAULT_ERROR_MESSAGE = 'Oops! Something went wrong. Please, try again later.';
+const EMPTY_LIST_MESSAGE = 'Nothing found for your request';
 
 export const useMainStore = defineStore('main', () => {
-  const picList = ref([]);
+  const picList = ref<PicListType>([]);
   const isLoading = ref(false);
   const errorMessage = ref('');
   const errorMessageType = ref('');
@@ -15,7 +18,9 @@ export const useMainStore = defineStore('main', () => {
   }
 
   function setSearchStr(text: string) {
-    getGiphys(text);
+    if (text.length) {
+      getGiphys(text);
+    }
   }
 
   function setIsLoading(isWaiting: boolean) {
@@ -26,12 +31,38 @@ export const useMainStore = defineStore('main', () => {
     errorMessageType.value = type;
   }
 
+  function setPicList(list: PicListType) {
+    picList.value = list;
+  }
+
   function getGiphys(str: string) {
     const url = `${PATH}?q=${str}&api_key=${API_KEY}`;
     setIsLoading(true);
     fetch(url)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(({ data }: {data: GifType}) => {
+      /**
+       * TODO realize pagination and infinite scroll
+       */
+      if (!data.length) {
+        setErrorMessage(EMPTY_LIST_MESSAGE);
+        setErrorMessageType('default');
+        return;
+      }
+      const pics = data.map(({ images }: {images: IImages}) => {
+        return {
+          mobile: {
+            gif: images.fixed_width.url,
+            static: images.fixed_width_still.url,
+          },
+          desktop: {
+            gif: images.original.url,
+            static: images.original_still.url,
+          }
+        };
+      });
+      setPicList(pics);
+    })
     .catch((err) => {
       console.warn(err);
       setErrorMessage(DEFAULT_ERROR_MESSAGE);
@@ -48,5 +79,6 @@ export const useMainStore = defineStore('main', () => {
     errorMessage,
     setErrorMessageType,
     errorMessageType,
+    setPicList,
   };
 });

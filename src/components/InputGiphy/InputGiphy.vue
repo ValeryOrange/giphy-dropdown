@@ -1,10 +1,16 @@
 <script setup lang="ts">
     const PLACEHOLDER = "Search animated pics from Giphy";
     const EMIT_DELAY = 500;
-    const emit = defineEmits(['userInputSet', 'invalidInput', 'clearNotification']);
+    const emit = defineEmits([
+        'userInputSet',
+        'invalidInput',
+        'clearNotification',
+        'clearPicList',
+    ]);
     let timeoutId = 0;
     function emitInputValue(e: Event) {
         emit('clearNotification');
+        emit('clearPicList');
         if (timeoutId) {
             clearTimeout(timeoutId);
         }
