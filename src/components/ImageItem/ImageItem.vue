@@ -1,7 +1,9 @@
 <script setup lang="ts">
     const props = defineProps({
         original: String,
-        src: String,
+        gif: String,
+        video: String,
+        title: String,
     });
     const emit = defineEmits(['sendOriginal']);
     function onClick() {
@@ -14,12 +16,33 @@
         class="image"
         @click="onClick"
     >
-        <img :src="src"/>
+        <picture>
+            <source type="video/mp4" :srcset="video">
+            <img
+                loading="lazy"
+                :src="gif"
+                :alt="title"
+                width="200"
+            />
+        </picture>
     </li>
 </template>
 
 <style scoped>
+    .image {
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
     .image:hover {
         cursor: pointer;
+    }
+    @media (min-width: 400px) {
+        .image {
+            margin-bottom: 15px;
+        }
     }
 </style>

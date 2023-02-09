@@ -1,15 +1,10 @@
 export interface IImages {
     fixed_width: {
-        url: string
-    },
-    fixed_width_still: {
         url: string,
+        mp4: string,
     },
     original: {
-        url: string,
-    },
-    original_still: {
-        url: string,
+        mp4: string,
     },
 }
 
@@ -24,15 +19,11 @@ export interface IGif {
 export type GifType = IGif[];
 
 export interface IPic {
+    title: string,
     id: string,
-    mobile: {
-        gif: string,
-        static: string,
-    },
-    desktop: {
-        gif: string,
-        static: string,
-    }
+    gif: string,
+    video: string,
+    original: string,
 }
 
 export type PicListType = IPic[];

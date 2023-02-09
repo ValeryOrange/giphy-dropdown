@@ -51,17 +51,13 @@ export const useMainStore = defineStore('main', () => {
         setErrorMessageType('default');
         return;
       }
-      const pics = data.map(({ id, images }: {id: string, images: IImages}) => {
+      const pics = data.map(({ id, title, images }: {title: string, id: string, images: IImages}) => {
         return {
           id,
-          mobile: {
-            gif: images.fixed_width.url,
-            static: images.fixed_width_still.url,
-          },
-          desktop: {
-            gif: images.original.url,
-            static: images.original_still.url,
-          }
+          title,
+          video: images.fixed_width.mp4,
+          gif: images.fixed_width.url,
+          original: images.original.mp4,
         };
       });
       setPicList(pics);
