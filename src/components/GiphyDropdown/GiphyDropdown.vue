@@ -47,6 +47,7 @@
 <template>
     <InputGiphy
         :text="store.searchStr"
+        :disabled="store.isLoading"
         @userInputSet="setUserInput"
         @invalidInput="setInvalidMessage(INVALID_INPUT_MESSAGE)"
         @clearNotification="clearErrorMessage"

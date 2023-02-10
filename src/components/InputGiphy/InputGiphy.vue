@@ -1,6 +1,7 @@
 <script setup lang="ts">
     const props = defineProps({
         text: String,
+        disabled: Boolean,
     });
     const PLACEHOLDER = "Search animated pics from Giphy";
     const EMIT_DELAY = 500;
@@ -37,6 +38,7 @@
         pattern="^[a-zA-Z0-9\s]+$"
         class="giphySearch"
         @input="emitInputValue"
+        :disabled="disabled"
     />
 </template>
 
