@@ -52,14 +52,14 @@
         @clearNotification="clearErrorMessage"
         @clearPicList="resetPicList"
     />
-    <AnimatedLoader v-show="store.isLoading"/>
+    <AnimatedLoader v-if="store.isLoading"/>
     <DropdownList
-        v-show="store.picList.length && !store.isLoading"
+        v-if="store.picList.length && !store.isLoading"
         :images="store.picList"
         @sendOriginal="copyImageUrl"
     />
     <UserNotification
-        v-show="store.errorMessage"
+        v-if="store.errorMessage"
         :text="store.errorMessage"
         :type="store.errorMessageType"
     />
